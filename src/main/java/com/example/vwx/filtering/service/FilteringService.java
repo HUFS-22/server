@@ -1,8 +1,7 @@
-package com.example.vwx.users.service;
+package com.example.vwx.filtering.service;
 
-import com.example.vwx.common.domain.BaseException;
-import com.example.vwx.users.domain.Filtering;
-import com.example.vwx.users.repository.FilteringRepository;
+import com.example.vwx.filtering.domain.Filtering;
+import com.example.vwx.filtering.repository.FilteringRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

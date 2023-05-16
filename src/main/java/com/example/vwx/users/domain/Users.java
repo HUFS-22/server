@@ -1,11 +1,11 @@
 package com.example.vwx.users.domain;
 
 import com.example.vwx.common.domain.BaseTimeEntity;
+import com.example.vwx.filtering.domain.Mapping;
 import com.example.vwx.users.dto.JoinDto;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity

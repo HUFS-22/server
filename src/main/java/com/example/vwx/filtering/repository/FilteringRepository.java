@@ -1,6 +1,6 @@
-package com.example.vwx.users.repository;
+package com.example.vwx.filtering.repository;
 
-import com.example.vwx.users.domain.Filtering;
+import com.example.vwx.filtering.domain.Filtering;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;

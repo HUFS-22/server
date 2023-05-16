@@ -1,6 +1,7 @@
-package com.example.vwx.users.domain;
+package com.example.vwx.filtering.domain;
 
 import com.example.vwx.common.domain.BaseTimeEntity;
+import com.example.vwx.users.domain.Users;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

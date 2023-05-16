@@ -1,10 +1,10 @@
-package com.example.vwx.users.service;
+package com.example.vwx.filtering.service;
 
 import com.example.vwx.common.domain.BaseException;
-import com.example.vwx.users.domain.Filtering;
-import com.example.vwx.users.domain.Mapping;
+import com.example.vwx.filtering.domain.Filtering;
+import com.example.vwx.filtering.domain.Mapping;
 import com.example.vwx.users.domain.Users;
-import com.example.vwx.users.repository.MappingRepository;
+import com.example.vwx.filtering.repository.MappingRepository;
 import com.example.vwx.users.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
