@@ -39,8 +39,9 @@ public class MappingService {
         return mappingRepository.save(mapping).getId();
     }
 
-    public List<Mapping> findKeywordList(Long userId) throws BaseException {
+    public List<String> findKeywordList(Long userId) throws BaseException {
         Users user = usersRepository.findById(userId).orElseThrow(() -> new BaseException(UNAUTHORIZED));
-        return mappingRepository.findAllByUsers(user);
+        List<String> keywords = mappingRepository.findAllByUsers(user); // 키워드 아이디 리스트 가지고 오기
+        return keywords;
     }
 }
