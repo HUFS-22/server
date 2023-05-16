@@ -2,7 +2,7 @@ package com.example.vwx.filtering.controller;
 
 import com.example.vwx.common.domain.BaseException;
 import com.example.vwx.common.domain.BaseResponse;
-import com.example.vwx.users.dto.FilterDto;
+import com.example.vwx.filtering.dto.FilterDto;
 import com.example.vwx.filtering.service.FilteringService;
 import com.example.vwx.filtering.service.MappingService;
 import io.swagger.annotations.Api;
@@ -19,7 +19,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FilteringController {
 
-    private final FilteringService filteringService;
     private final MappingService mappingService;
 
 

@@ -2,7 +2,7 @@ package com.example.vwx.filtering.service;
 
 import com.example.vwx.common.domain.BaseException;
 import com.example.vwx.filtering.domain.Filtering;
-import com.example.vwx.filtering.domain.Mapping;
+import com.example.vwx.filtering.domain.FilterMapping;
 import com.example.vwx.users.domain.Users;
 import com.example.vwx.filtering.repository.MappingRepository;
 import com.example.vwx.users.repository.UsersRepository;
@@ -35,8 +35,8 @@ public class MappingService {
     }
 
     private Long mapKeywordToUser(Users user, Filtering keyword){
-        Mapping mapping = new Mapping(user, keyword);
-        return mappingRepository.save(mapping).getId();
+        FilterMapping filterMapping = new FilterMapping(user, keyword);
+        return mappingRepository.save(filterMapping).getId();
     }
 
     public List<String> findKeywordList(Long userId) throws BaseException {

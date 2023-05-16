@@ -21,7 +21,7 @@ public class Filtering extends BaseTimeEntity {
     private String keyword;
 
     @OneToMany(mappedBy = "filtering", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<Mapping> mapping;
+    private List<FilterMapping> filterMapping;
 
     @Builder
     public Filtering(String keyword) {

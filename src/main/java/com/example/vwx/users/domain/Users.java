@@ -1,7 +1,8 @@
 package com.example.vwx.users.domain;
 
 import com.example.vwx.common.domain.BaseTimeEntity;
-import com.example.vwx.filtering.domain.Mapping;
+import com.example.vwx.filtering.domain.FilterMapping;
+import com.example.vwx.portfolio.domain.Portfolio;
 import com.example.vwx.users.dto.JoinDto;
 import lombok.*;
 
@@ -28,8 +29,11 @@ public class Users extends BaseTimeEntity {
     private String job;
 
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Mapping> mappings ;
+    private List<FilterMapping> filterMappings;
 
+
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Portfolio> portfolios;
 
     public static Users ofUser(JoinDto joinDto) {
         Users member = Users.builder()

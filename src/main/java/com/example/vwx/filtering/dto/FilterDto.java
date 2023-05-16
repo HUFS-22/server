@@ -1,4 +1,4 @@
-package com.example.vwx.users.dto;
+package com.example.vwx.filtering.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;

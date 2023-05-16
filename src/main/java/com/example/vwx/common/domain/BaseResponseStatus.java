@@ -7,7 +7,8 @@ public enum BaseResponseStatus {
     SUCCESS(true, 200, "요청에 성공하였습니다."),
 
     RESPONSE_ERROR(false, 3000, "해당 키워드에 대한 검색 결과가 없습니다."),
-    UNAUTHORIZED(false, 3010, "회원가입 되지 않은 유저입니다.");
+    UNAUTHORIZED(false, 3010, "회원가입 되지 않은 유저입니다."),
+    NOT_FOUND_PORTFOLIO(false, 3020, "해당 포트폴리오 아이디에 대한 포트폴리오가 없습니다.");
 
     private final boolean isSuccess;
     private final int code;

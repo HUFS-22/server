@@ -12,11 +12,11 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Mapping extends BaseTimeEntity {
+public class FilterMapping extends BaseTimeEntity {
 
     @Id
     @GeneratedValue
-    @Column(name = "mapping_id")
+    @Column(name = "filterMapping_id")
     private Long id;
 
     @ManyToOne
@@ -26,7 +26,7 @@ public class Mapping extends BaseTimeEntity {
     private Filtering filtering;
 
     @Builder
-    public Mapping(Users users, Filtering filtering) {
+    public FilterMapping(Users users, Filtering filtering) {
         this.users = users;
         this.filtering = filtering;
     }
