@@ -1,20 +1,24 @@
 package com.example.vwx.portfolio.service;
 
 import com.example.vwx.common.domain.BaseException;
+import com.example.vwx.portfolio.dto.SearchPortfolioDto;
 import com.example.vwx.portfolio.domain.Portfolio;
-import com.example.vwx.portfolio.domain.WorkCategory;
 import com.example.vwx.portfolio.dto.PortfolioDto;
+import com.example.vwx.portfolio.dto.SearchDto;
 import com.example.vwx.portfolio.repository.PortfolioRepository;
 import com.example.vwx.portfolio.repository.TagMappingRepository;
 import com.example.vwx.portfolio.repository.WorkCategoryRepository;
 import com.example.vwx.users.domain.Users;
+import com.example.vwx.users.dto.SearchArtistDto;
 import com.example.vwx.users.repository.UsersRepository;
-import com.fasterxml.jackson.databind.ser.Serializers;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.example.vwx.common.domain.BaseResponseStatus.NOT_FOUND_PORTFOLIO;
 import static com.example.vwx.common.domain.BaseResponseStatus.UNAUTHORIZED;
@@ -58,5 +62,29 @@ public class PortfolioService {
                 .categories(workCategory)
                 .hashTags(hashtags)
                 .build();
+    }
+
+    public SearchDto searchAll(String word) throws BaseException {
+        List<SearchArtistDto> usersList = usersRepository.findMainByKeyword(word, PageRequest.of(0,5)); // 5개 추출
+        List<SearchPortfolioDto> portfolio = portfolioRepository.findMainByKeyword(word, PageRequest.of(0,5)); //5개 추출
+        return SearchDto.builder()
+                .artistList(usersList.stream().collect(Collectors.toList()))
+                .portfolioList(portfolio.stream().collect(Collectors.toList()))
+                .build();
+    }
+
+    public List<SearchPortfolioDto> searchPortfolio(String word) throws BaseException {
+        List<SearchPortfolioDto> portfolioList = portfolioRepository.findByKeyword(word);
+        List<SearchPortfolioDto> portfolioAllList = new ArrayList<>();
+        for (SearchPortfolioDto portfolio : portfolioList) {
+            SearchPortfolioDto dto = SearchPortfolioDto.builder()
+                    .title(portfolio.getTitle())
+                    .coverImageUrl(portfolio.getCoverImageUrl())
+                    .userName(portfolio.getUserName())
+                    .profileImageUrl(portfolio.getProfileImageUrl())
+                    .build();
+            portfolioAllList.add(dto);
+        }
+        return portfolioAllList;
     }
 }

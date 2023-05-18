@@ -53,4 +53,7 @@ public class UsersController {
         }
     }
 
+//    @ApiOperation(value = "아티스트 검색", notes = "발견에서 검색창에 통합 검색하고 나오는 아티스트 페이지.")
+//    @GetMapping("/search/artist")
+
 }
