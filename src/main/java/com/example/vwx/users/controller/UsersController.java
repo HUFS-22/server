@@ -1,7 +1,9 @@
 package com.example.vwx.users.controller;
 
+import com.example.vwx.filtering.dto.FilterDto;
 import com.example.vwx.users.dto.ChannelDto;
 import com.example.vwx.users.dto.MyPageDto;
+import com.example.vwx.users.dto.SearchArtistDto;
 import com.example.vwx.users.service.UsersService;
 import com.example.vwx.common.domain.BaseException;
 import com.example.vwx.common.domain.BaseResponse;
@@ -11,6 +13,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Api(tags = "유저 API")
 @RestController
@@ -52,8 +56,17 @@ public class UsersController {
             return new BaseResponse<>(exception.getStatus());
         }
     }
-
+//
 //    @ApiOperation(value = "아티스트 검색", notes = "발견에서 검색창에 통합 검색하고 나오는 아티스트 페이지.")
-//    @GetMapping("/search/artist")
+//    @PostMapping("/search/artist")
+//    public  BaseResponse<List<SearchArtistDto>> searchArtist(@ApiParam(value = "검색어") @RequestParam(name = "q") String word,
+//                                                       @ApiParam(value = "필터링 키워드") @RequestBody(required = false) FilterDto keywords) {
+//        try {
+//            List<SearchArtistDto> result = usersService.searchArtist(word, keywords.getKeywords());
+//            return new BaseResponse<>(result);
+//        } catch (BaseException exception) {
+//            return new BaseResponse<>(exception.getStatus());
+//        }
+//    }
 
 }

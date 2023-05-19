@@ -26,6 +26,11 @@ public class MappingService {
     public String save(List<String> keywords, Long userId) throws BaseException {
         Users users = usersRepository.findById(userId).orElseThrow(() -> new BaseException(UNAUTHORIZED));
         if(keywords.size() == 0) return "등록할 키워드가 없습니다.";
+        List<FilterMapping> isMapping = mappingRepository.findFilterMappingsByUsers(users);
+        if (isMapping.size() != 0) {
+            String result = update(keywords, users);
+            return result;
+        }
         keywords.stream()
                 .map(keyword ->
                         filteringService.findByKeyword(keyword)
@@ -43,5 +48,17 @@ public class MappingService {
         Users user = usersRepository.findById(userId).orElseThrow(() -> new BaseException(UNAUTHORIZED));
         List<String> keywords = mappingRepository.findAllByUsers(user); // 키워드 아이디 리스트 가지고 오기
         return keywords;
+    }
+
+    @Transactional
+    public String update(List<String> keywords, Users users) throws BaseException {
+        mappingRepository.deleteAllByUsers(users);
+        keywords.stream()
+                .map(keyword ->
+                        filteringService.findByKeyword(keyword)
+                                .orElseGet(() -> filteringService.save(keyword)))
+                .forEach(keyword -> mapKeywordToUser(users, keyword)); // 다시 등록
+        return "아티스트 필터링 키워드를 등록했습니다.";
+
     }
 }
