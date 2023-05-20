@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class SearchPortfolioDto {
+    private Long portfolioId;
     private String title;
     private String coverImageUrl;
     private String userName;

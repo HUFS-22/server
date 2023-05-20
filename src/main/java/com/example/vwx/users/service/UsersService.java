@@ -12,17 +12,12 @@ import com.example.vwx.common.domain.BaseException;
 import com.example.vwx.users.domain.Users;
 import com.example.vwx.users.dto.JoinDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.example.vwx.common.domain.BaseResponseStatus.NOT_FOUND_PORTFOLIO;
 import static com.example.vwx.common.domain.BaseResponseStatus.UNAUTHORIZED;
 
 @Service
@@ -63,20 +58,39 @@ public class UsersService {
     }
 
 
-//    public List<SearchArtistDto> searchArtist(String word, List<String> keywords) throws BaseException {
-//
-//        List<SearchArtistDto> artistList = usersRepository.findSearchByKeyword(word);
-//
-//        List<SearchArtistDto> artistAllList = new ArrayList<>();
-//        for (SearchArtistDto artist : artistList) {
-//            SearchArtistDto dto = SearchArtistDto.builder()
-//                    .userName(artist.getUserName())
-//                    .profileImageUrl(artist.getProfileImageUrl())
-//                    .job(artist.getJob())
-//                    .belong(artist.getBelong())
-//                    .build();
-//            artistAllList.add(dto);
-//        }
-//        return artistAllList;
-//    }
+    public List<SearchArtistDto> searchArtist(String word, List<String> keywords) throws BaseException {
+
+        keywords.add(word);
+        int len = keywords.size();
+
+        HashMap<List<String>, Integer> map = new HashMap<>();
+        List<SearchArtistDto> artistAllList = new ArrayList<>();
+        for (String keyword : keywords) {
+            List<List<String>> list = usersRepository.findSearchByKeyword(keyword);
+            for (List<String> dto : list) {
+                if (map.containsKey(dto)) {
+                    map.put(dto, map.get(dto) + 1);
+                } else {
+                    map.put(dto, 1);
+                }
+            }
+        }
+        Iterator<Map.Entry<List<String>, Integer>> entry = map.entrySet().iterator();
+
+        while (entry.hasNext()) {
+            Map.Entry<List<String>, Integer> element = entry.next();
+            if (element.getValue().equals(len)) {
+                List<String> artist = element.getKey();
+                SearchArtistDto dto = SearchArtistDto.builder()
+                        .userId(Long.valueOf(artist.get(0)))
+                        .userName(artist.get(1))
+                        .belong(artist.get(2))
+                        .job(artist.get(3))
+                        .profileImageUrl(artist.get(4))
+                        .build();
+                artistAllList.add(dto);
+            }
+        }
+        return artistAllList;
+    }
 }

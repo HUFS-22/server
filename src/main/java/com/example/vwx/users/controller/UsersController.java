@@ -56,17 +56,17 @@ public class UsersController {
             return new BaseResponse<>(exception.getStatus());
         }
     }
-//
-//    @ApiOperation(value = "아티스트 검색", notes = "발견에서 검색창에 통합 검색하고 나오는 아티스트 페이지.")
-//    @PostMapping("/search/artist")
-//    public  BaseResponse<List<SearchArtistDto>> searchArtist(@ApiParam(value = "검색어") @RequestParam(name = "q") String word,
-//                                                       @ApiParam(value = "필터링 키워드") @RequestBody(required = false) FilterDto keywords) {
-//        try {
-//            List<SearchArtistDto> result = usersService.searchArtist(word, keywords.getKeywords());
-//            return new BaseResponse<>(result);
-//        } catch (BaseException exception) {
-//            return new BaseResponse<>(exception.getStatus());
-//        }
-//    }
+
+    @ApiOperation(value = "아티스트 검색", notes = "발견에서 검색창에 통합 검색하고 나오는 아티스트 페이지.")
+    @PostMapping("/search/artist")
+    public  BaseResponse<List<SearchArtistDto>> searchArtist(@ApiParam(value = "검색어") @RequestParam(name = "q") String word,
+                                                       @ApiParam(value = "필터링 키워드") @RequestBody(required = false) FilterDto keywords) {
+        try {
+            List<SearchArtistDto> result = usersService.searchArtist(word, keywords.getKeywords());
+            return new BaseResponse<>(result);
+        } catch (BaseException exception) {
+            return new BaseResponse<>(exception.getStatus());
+        }
+    }
 
 }

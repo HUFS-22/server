@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class SearchArtistDto {
+    private Long userId;
     private String userName;
     private String belong;
     private String job;

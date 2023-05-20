@@ -78,6 +78,7 @@ public class PortfolioService {
         List<SearchPortfolioDto> portfolioAllList = new ArrayList<>();
         for (SearchPortfolioDto portfolio : portfolioList) {
             SearchPortfolioDto dto = SearchPortfolioDto.builder()
+                    .portfolioId(portfolio.getPortfolioId())
                     .title(portfolio.getTitle())
                     .coverImageUrl(portfolio.getCoverImageUrl())
                     .userName(portfolio.getUserName())
