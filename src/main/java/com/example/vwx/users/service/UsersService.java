@@ -1,16 +1,13 @@
 package com.example.vwx.users.service;
 
-import com.example.vwx.filtering.dto.FilterDto;
+import com.example.vwx.filtering.repository.MappingRepository;
 import com.example.vwx.portfolio.domain.Portfolio;
 import com.example.vwx.portfolio.dto.ChannelPortfolioDto;
 import com.example.vwx.portfolio.repository.PortfolioRepository;
-import com.example.vwx.users.dto.ChannelDto;
-import com.example.vwx.users.dto.MyPageDto;
-import com.example.vwx.users.dto.SearchArtistDto;
+import com.example.vwx.users.dto.*;
 import com.example.vwx.users.repository.UsersRepository;
 import com.example.vwx.common.domain.BaseException;
 import com.example.vwx.users.domain.Users;
-import com.example.vwx.users.dto.JoinDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +24,7 @@ public class UsersService {
 
     private final UsersRepository usersRepository;
     private final PortfolioRepository portfolioRepository;
+    private final MappingRepository mappingRepository;
 
     public void join(JoinDto joinDto) throws BaseException {
         usersRepository.save(Users.ofUser(joinDto));
@@ -92,5 +90,20 @@ public class UsersService {
             }
         }
         return artistAllList;
+    }
+
+    public AllArtistDto getArtist() throws BaseException {
+        List<Users> usersList = usersRepository.findAll();
+        return AllArtistDto.builder()
+                .artistList(usersList.stream()
+                        .map(users -> ArtistDto.builder()
+                                .id((users.getId()))
+                                .userName(users.getUserName())
+                                .belong(users.getBelong())
+                                .job(users.getJob())
+                                .profileImageUrl(users.getProfileImageUrl())
+                                .filtering(mappingRepository.findAllByUsers(users))
+                                .build()).collect(Collectors.toList()))
+                .build();
     }
 }

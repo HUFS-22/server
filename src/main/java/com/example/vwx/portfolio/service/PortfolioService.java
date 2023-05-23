@@ -1,10 +1,8 @@
 package com.example.vwx.portfolio.service;
 
 import com.example.vwx.common.domain.BaseException;
-import com.example.vwx.portfolio.dto.SearchPortfolioDto;
+import com.example.vwx.portfolio.dto.*;
 import com.example.vwx.portfolio.domain.Portfolio;
-import com.example.vwx.portfolio.dto.PortfolioDto;
-import com.example.vwx.portfolio.dto.SearchDto;
 import com.example.vwx.portfolio.repository.PortfolioRepository;
 import com.example.vwx.portfolio.repository.TagMappingRepository;
 import com.example.vwx.portfolio.repository.WorkCategoryRepository;
@@ -63,6 +61,21 @@ public class PortfolioService {
                 .hashTags(hashtags)
                 .build();
     }
+    public AllPortfolioDto getAllPortfolio() throws BaseException{
+        List<Portfolio> portfolioList = portfolioRepository.findAll();
+        return AllPortfolioDto.builder()
+                .portfolioDtoList(portfolioList.stream()
+                        .map(portfolio -> PortfolioResponseDto.builder()
+                                .id(portfolio.getId())
+                                .title(portfolio.getTitle())
+                                .content(portfolio.getContent())
+                                .coverImageUrl(portfolio.getCoverImageUrl())
+                                .categories(workCategoryRepository.findCategoriesByPortfolio(portfolio))
+                                .hashTags(tagMappingRepository.findTagsByPortfolio(portfolio))
+                                .build()).collect(Collectors.toList()))
+                .build();
+    }
+
 
     public SearchDto searchAll(String word) throws BaseException {
         List<SearchArtistDto> usersList = usersRepository.findMainByKeyword(word, PageRequest.of(0,5)); // 5개 추출

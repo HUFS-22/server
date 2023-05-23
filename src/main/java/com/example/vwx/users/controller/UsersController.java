@@ -1,13 +1,10 @@
 package com.example.vwx.users.controller;
 
 import com.example.vwx.filtering.dto.FilterDto;
-import com.example.vwx.users.dto.ChannelDto;
-import com.example.vwx.users.dto.MyPageDto;
-import com.example.vwx.users.dto.SearchArtistDto;
+import com.example.vwx.users.dto.*;
 import com.example.vwx.users.service.UsersService;
 import com.example.vwx.common.domain.BaseException;
 import com.example.vwx.common.domain.BaseResponse;
-import com.example.vwx.users.dto.JoinDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -63,6 +60,17 @@ public class UsersController {
                                                        @ApiParam(value = "필터링 키워드") @RequestBody(required = false) FilterDto keywords) {
         try {
             List<SearchArtistDto> result = usersService.searchArtist(word, keywords.getKeywords());
+            return new BaseResponse<>(result);
+        } catch (BaseException exception) {
+            return new BaseResponse<>(exception.getStatus());
+        }
+    }
+
+    @ApiOperation(value = "아티스트 조회", notes = "모든 아티스트 정보 조회")
+    @GetMapping("/artist")
+    public BaseResponse<AllArtistDto> getArtist() {
+        try {
+            AllArtistDto result = usersService.getArtist();
             return new BaseResponse<>(result);
         } catch (BaseException exception) {
             return new BaseResponse<>(exception.getStatus());
