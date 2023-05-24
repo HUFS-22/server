@@ -20,13 +20,15 @@ public interface PortfolioRepository extends JpaRepository<Portfolio, Long> {
     @Query("SELECT DISTINCT new com.example.vwx.portfolio.dto.SearchPortfolioDto (p.id, p.title, p.coverImageUrl, u.userName, u.profileImageUrl) FROM Portfolio p INNER JOIN Users u ON p.users = u " +
             "INNER JOIN TagMapping m ON m.portfolio = p " +
             "INNER JOIN Tag t ON m.tag = t " +
-            "WHERE p.title Like CONCAT('%',:word,'%') OR t.hashtag Like CONCAT('%',:word,'%')")
+            "WHERE p.title Like CONCAT('%',:word,'%') OR t.hashtag Like CONCAT('%',:word,'%') " +
+            "OR u.userName = :word")
     List<SearchPortfolioDto> findByKeyword(@Param("word") String word);
 
     @Query(value = "SELECT DISTINCT new com.example.vwx.portfolio.dto.SearchPortfolioDto (p.id, p.title, p.coverImageUrl, u.userName, u.profileImageUrl) " +
             "FROM Portfolio p INNER JOIN Users u ON p.users = u " +
             "INNER JOIN TagMapping m ON m.portfolio = p " +
             "INNER JOIN Tag t ON m.tag = t " +
-            "WHERE p.title Like CONCAT('%',:word,'%') OR t.hashtag Like CONCAT('%',:word,'%') ")
+            "WHERE p.title Like CONCAT('%',:word,'%') OR t.hashtag Like CONCAT('%',:word,'%') " +
+            "OR u.userName = :word")
     List<SearchPortfolioDto> findMainByKeyword(@Param("word") String word, Pageable pageable);
 }

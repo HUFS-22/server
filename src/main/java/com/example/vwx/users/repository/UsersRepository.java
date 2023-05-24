@@ -17,12 +17,12 @@ public interface UsersRepository extends JpaRepository<Users, Long> {
     @Query(value = "SELECT DISTINCT new com.example.vwx.users.dto.SearchArtistDto(u.id, u.userName, u.belong, u.job, u.profileImageUrl)" +
             "FROM Users u INNER JOIN FilterMapping m ON m.users = u " +
             "INNER JOIN Filtering f ON m.filtering = f " +
-            "WHERE f.keyword = :word")
+            "WHERE f.keyword = :word OR u.userName = :word")
     List<SearchArtistDto> findMainByKeyword(@Param("word") String word, Pageable pageable);
 
     @Query(value = "SELECT DISTINCT u.id, u.userName, u.belong, u.job, u.profileImageUrl " +
             "FROM Users u INNER JOIN FilterMapping m ON m.users = u " +
             "INNER JOIN Filtering f ON m.filtering = f " +
-            "WHERE f.keyword = :word")
+            "WHERE f.keyword = :word OR u.userName = :word")
     List<List<String>> findSearchByKeyword(@Param("word") String word);
 }
