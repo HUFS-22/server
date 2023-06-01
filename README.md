@@ -9,6 +9,18 @@
 ![vwx (2)](https://github.com/DAHLIACHOI/Algorithm/assets/48826098/25dbfa12-14be-4b49-892c-1a627e79e8cf)
 
 ## 프로젝트 소개
+
+기존의 탤런티드 사이트에 원하는 조건의 아티스트를 빠르게 찾을 수 있는 필터링 기능을 개발한다.
+
+예를 들어, 160cm 키를 가진 쌍커풀이 없고 노래와 일본어를 잘하는 여자 배우를 찾고 싶을 때, 원하는 조건의 아티스트를 검색할 수 있도록 도와준다.
+
+
+### 팀원 소개
+
+- 최예지 : 팀장, 기획, 백엔드
+- 박민주 : 기획, 프론트엔드
+- 김소연 : 기획, 디자인
+
 ![010](https://github.com/DAHLIACHOI/Algorithm/assets/48826098/e03fa3a7-191e-4821-ad9e-c33832ce3398)
 ![013](https://github.com/DAHLIACHOI/Algorithm/assets/48826098/11e78f44-f331-414f-8150-238fb7007af9)
 ![014](https://github.com/DAHLIACHOI/Algorithm/assets/48826098/6cd2eb48-ba0b-4581-a5bc-73c6204da467)
